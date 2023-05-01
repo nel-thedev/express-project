@@ -1,0 +1,18 @@
+<h2>{{post.title}}</h2>
+<p>{{post.content}}</p>
+<p>Tagged:
+  {{#each post.tags}}
+    {{#if @last}}
+      <span class='tag'>{{this}}</span>.
+    {{/if}}
+    <span class='tag'>{{this}}</span>,
+  {{/each}}
+</p>
+<p>Created by: {{post.user}}</p>
+<hr />
+<br />
+<h4>Comments:</h4>
+{{#each post.comments}}
+  <h5>{{this.user}}</h5>
+  <p>{{this.content}}</p>
+{{/each}}
