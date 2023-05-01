@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 const Post = require('../models/Post.model');
 
+// HAVE TO ADD ROUTE PROTECTION
 router.get('/new-post', (req, res, next) => {
   res.render('post/new-post.hbs');
 });
@@ -19,7 +20,7 @@ router.post('/new-post', (req, res, next) => {
   })
     .then((createdPost) => {
       console.log('Created: ', createdPost);
-      res.redirect(`/post/post/${createdPost._id}`);
+      res.redirect(`/post/${createdPost._id}`);
     })
     .catch((err) => console.log(err));
 });

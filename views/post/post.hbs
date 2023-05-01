@@ -8,11 +8,26 @@
     <span class='tag'>{{this}}</span>,
   {{/each}}
 </p>
-<p>Created by: {{post.user}}</p>
+<p>Created by: {{post.user.username}}</p>
 <hr />
 <br />
 <h4>Comments:</h4>
-{{#each post.comments}}
-  <h5>{{this.user}}</h5>
-  <p>{{this.content}}</p>
-{{/each}}
+
+<div class='add-comment'>
+  <form action='/comments/add-comment/{{post_id}}'>
+    <label for='comment'>Add comment:</label>
+    <input type='text' name='comment' id='comment' />
+    <button type='submit'>Add comment</button>
+  </form>
+</div>
+
+{{#if post.comments}}
+  {{#each post.comments}}
+    <h5>{{this.user}}</h5>
+    <p>{{this.content}}</p>
+  {{/each}}
+
+{{else}}
+  <p>No comments yet.</p>
+
+{{/if}}
