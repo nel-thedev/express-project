@@ -28,6 +28,10 @@ router.post('/new-post', (req, res, next) => {
 router.get('/:id', function (req, res, next) {
   Post.findById(req.params.id)
     .populate('user')
+    .populate({
+      path: 'comments',
+      populate: { path: 'user' },
+    })
     .then((post) => {
       res.render('post/post.hbs', { post });
     })
