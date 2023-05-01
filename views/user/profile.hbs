@@ -1,0 +1,21 @@
+{{#if user}}
+  <h2>Welcome, {{user.username}}!</h2>
+  <div class='user-info'>
+    <p>Posts: {{user.posts.length}}</p>
+    <p>Favorites: {{user.favorites.length}}</p>
+  </div>
+
+  <div class='posts'>
+    <h3>{{user.username}}'s posts:</h3>
+    {{#each user.posts}}
+      <div class='post-container'>
+        <h4>{{posts.title}}</h4>
+        <p>{{posts.content}}</p>
+        <p>Favorited: {{posts.favorites.length}}</p>
+      </div>
+    {{/each}}
+  </div>
+
+{{else}}
+  <p>Please log in to see profile</p>
+{{/if}}
