@@ -7,7 +7,7 @@
 
     {{#each allPosts}}
       <div class='col post-container'>
-        <h4>{{this.title}}</h4>
+        <h4><a href='/post/{{this._id}}'>{{this.title}}</a></h4>
         <p>{{this.content}}</p>
         <p>Favorited: {{this.favorites.length}}</p>
       </div>

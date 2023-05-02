@@ -7,13 +7,15 @@ const saltRounds = 10;
 
 const User = require('../models/User.model');
 
+const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard');
+
 // SIGN UP -------------------------------------------------------------
 
-router.get('/signup', function (req, res, next) {
+router.get('/signup', isLoggedOut, function (req, res, next) {
   res.render('auth/signup.hbs');
 });
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', isLoggedOut, (req, res, next) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -45,11 +47,11 @@ router.post('/signup', (req, res, next) => {
 
 // LOG IN ---------------------------------------------------------------------------------
 
-router.get('/login', function (req, res, next) {
+router.get('/login', isLoggedOut, function (req, res, next) {
   res.render('auth/login.hbs');
 });
 
-router.post('/login', (req, res, next) => {
+router.post('/login', isLoggedOut, (req, res, next) => {
   const { username, password } = req.body;
 
   User.findOne({ username })

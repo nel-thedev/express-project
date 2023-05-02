@@ -5,8 +5,10 @@ var mongoose = require('mongoose');
 const Post = require('../models/Post.model');
 const User = require('../models/User.model');
 
+const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard');
+
 // HAVE TO ADD ROUTE PROTECTION
-router.get('/new-post', (req, res, next) => {
+router.get('/new-post', isLoggedIn, (req, res, next) => {
   res.render('post/new-post.hbs');
 });
 
@@ -32,7 +34,7 @@ router.get('/new-post', (req, res, next) => {
 // });
 
 //router.post('/new-post') async/await version
-router.post('/new-post', async (req, res) => {
+router.post('/new-post', isLoggedIn, async (req, res) => {
   try {
     const createdPost = await Post.create({
       ...req.body,

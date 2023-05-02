@@ -4,8 +4,9 @@ var mongoose = require('mongoose');
 
 const Post = require('../models/Post.model');
 const Comment = require('../models/Comment.model');
+const { isLoggedIn } = require('../middleware/route-guard');
 
-router.post('/add-comment/:id', function (req, res, next) {
+router.post('/add-comment/:id', isLoggedIn, function (req, res, next) {
   Comment.create({
     user: req.session.user._id,
     content: req.body.comment,
