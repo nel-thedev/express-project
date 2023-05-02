@@ -1,5 +1,4 @@
 <h2>{{post.title}}</h2>
-<p>{{post.content}}</p>
 <p>Tagged:
   {{#each post.tags}}
     {{#if @last}}
@@ -10,6 +9,9 @@
     {{/if}}
   {{/each}}
 </p>
+<p>{{post.content}}</p>
+<a href='/post/{{post._id}}/add-to-favorites'>Add to favorites!</a>
+<p>Favorited {{post.favorites.length}} times.</p>
 <p>Created by: {{post.user.username}}</p>
 <hr />
 <br />

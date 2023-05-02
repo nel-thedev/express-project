@@ -3,26 +3,51 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 const Post = require('../models/Post.model');
+const User = require('../models/User.model');
 
 // HAVE TO ADD ROUTE PROTECTION
 router.get('/new-post', (req, res, next) => {
   res.render('post/new-post.hbs');
 });
 
-router.post('/new-post', (req, res, next) => {
-  const { title, content, tags } = req.body;
+// router.post('/new-post', (req, res, next) => {
+//   const { title, content, tags } = req.body;
 
-  Post.create({
-    user: req.session.user._id,
-    title,
-    content,
-    tags,
-  })
-    .then((createdPost) => {
-      console.log('Created: ', createdPost);
-      res.redirect(`/post/${createdPost._id}`);
-    })
-    .catch((err) => console.log(err));
+//   Post.create({
+//     user: req.session.user._id,
+//     title,
+//     content,
+//     tags,
+//   })
+//     .then((newPost) => {
+//       return User.findByIdAndUpdate(newPost.user, {
+//         $push: { posts: newPost._id },
+//         new: true,
+//       }).then(() => {
+//         console.log('Created: ', newPost);
+//         res.redirect(`/post/${newPost._id}`);
+//       });
+//     })
+//     .catch((err) => console.log(err));
+// });
+
+//router.post('/new-post') async/await version
+router.post('/new-post', async (req, res) => {
+  try {
+    const createdPost = await Post.create({
+      ...req.body,
+      user: req.session.user._id,
+    });
+    console.log('here after create post');
+    await User.findByIdAndUpdate(createdPost.user, {
+      $push: { posts: createdPost._id },
+      new: true,
+    });
+    console.log('here after update user');
+    res.redirect(`/post/${createdPost._id}`);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.get('/:id', function (req, res, next) {
@@ -34,6 +59,22 @@ router.get('/:id', function (req, res, next) {
     })
     .then((post) => {
       res.render('post/post.hbs', { post });
+    })
+    .catch((err) => console.log(err));
+});
+
+router.get('/:id/add-to-favorites', (req, res) => {
+  User.findByIdAndUpdate(req.session.user._id, {
+    $push: { favorites: req.params.id },
+    new: true,
+  });
+  Post.findByIdAndUpdate(req.params.id, {
+    $push: { favorites: req.session.user._id },
+    new: true,
+  })
+
+    .then(() => {
+      res.redirect(`/post/${req.params.id}`);
     })
     .catch((err) => console.log(err));
 });

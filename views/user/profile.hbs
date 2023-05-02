@@ -1,17 +1,30 @@
-{{#if user}}
-  <h2>Welcome, {{user.username}}!</h2>
+{{#if foundUser}}
+  <h2>Welcome, {{foundUser.username}}!</h2>
   <div class='user-info'>
-    <p>Posts: {{user.posts.length}}</p>
-    <p>Favorites: {{user.favorites.length}}</p>
+    <p>Posts: {{foundUser.posts.length}}</p>
+    <p>Favorites: {{foundUser.favorites.length}}</p>
   </div>
 
   <div class='posts'>
-    <h3>{{user.username}}'s posts:</h3>
-    {{#each user.posts}}
+    <h3>{{foundUser.username}}'s posts:</h3>
+    {{#each foundUser.posts}}
       <div class='post-container'>
-        <h4>{{posts.title}}</h4>
-        <p>{{posts.content}}</p>
-        <p>Favorited: {{posts.favorites.length}}</p>
+        <a href='/post/{{this._id}}'><h4>{{this.title}}</h4></a>
+        <p>{{this.content}}</p>
+        <p>Favorited: {{this.favorites.length}}</p>
+        <p>Created by: {{this.user.username}}</p>
+      </div>
+    {{/each}}
+  </div>
+
+  <div class='favorites'>
+    <h3>{{foundUser.username}}'s favorited posts:</h3>
+    {{#each foundUser.favorites}}
+      <div class='post-container'>
+        <a href='/post/{{this._id}}'><h4>{{this.title}}</h4></a>
+        <p>{{this.content}}</p>
+        <p>Favorited: {{this.favorites.length}}</p>
+        <p>Created by: {{this.user.username}}</p>
       </div>
     {{/each}}
   </div>
