@@ -1,0 +1,32 @@
+{{#if foundUser}}
+  <h2>{{foundUser.username}}'s profile</h2>
+  <div class='user-info'>
+    <p>Posts: {{foundUser.posts.length}}</p>
+    <p>Favorites: {{foundUser.favorites.length}}</p>
+  </div>
+
+  <div class='posts'>
+    <h3>{{foundUser.username}}'s posts:</h3>
+    {{#each foundUser.posts}}
+      <div class='post-container'>
+        <a href='/post/{{this._id}}'><h4>{{this.title}}</h4></a>
+        <p>{{this.content}}</p>
+        <p>Favorited: {{this.favorites.length}}</p>
+        <p>Created by: {{this.user.username}}</p>
+      </div>
+    {{/each}}
+  </div>
+
+  <div class='favorites'>
+    <h3>{{foundUser.username}}'s favorited posts:</h3>
+    {{#each foundUser.favorites}}
+      <div class='post-container'>
+        <a href='/post/{{this._id}}'><h4>{{this.title}}</h4></a>
+        <p>{{this.content}}</p>
+        <p>Favorited: {{this.favorites.length}}</p>
+        <p>Created by: {{this.user.username}}</p>
+      </div>
+    {{/each}}
+  </div>
+
+{{/if}}

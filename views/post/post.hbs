@@ -12,7 +12,10 @@
 <p>{{post.content}}</p>
 <a href='/post/{{post._id}}/add-to-favorites'>Add to favorites!</a>
 <p>Favorited {{post.favorites.length}} times.</p>
-<p>Created by: {{post.user.username}}</p>
+<p>Created by:
+  <a
+    href='/user/public-profile/{{post.user._id}}'
+  >{{post.user.username}}</a></p>
 <hr />
 <br />
 <h4>Comments:</h4>
@@ -27,7 +30,9 @@
 
 {{#if post.comments}}
   {{#each post.comments}}
-    <h5>{{this.user.username}}</h5>
+    <h5><a
+        href='/user/public-profile/{{this.user._id}}'
+      >{{this.user.username}}</a>:</h5>
     <p>{{this.content}}</p>
     <br />
   {{/each}}
