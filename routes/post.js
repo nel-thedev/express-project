@@ -5,7 +5,11 @@ var mongoose = require('mongoose');
 const Post = require('../models/Post.model');
 const User = require('../models/User.model');
 
-const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard');
+const {
+  isLoggedIn,
+  isLoggedOut,
+  isPostOwner,
+} = require('../middleware/route-guard');
 
 // HAVE TO ADD ROUTE PROTECTION
 router.get('/new-post', isLoggedIn, (req, res, next) => {
@@ -65,7 +69,27 @@ router.get('/:id', function (req, res, next) {
     .catch((err) => console.log(err));
 });
 
-router.get('/:id/add-to-favorites', (req, res) => {
+router.get('/:id/edit-post', isPostOwner, function (req, res, next) {
+  Post.findById(req.params.id)
+    .populate('user')
+    .populate({
+      path: 'comments',
+      populate: { path: 'user' },
+    })
+    .then((post) => {
+      res.render('post/edit-post.hbs', { post });
+    })
+    .catch((err) => console.log(err));
+});
+
+router.post('/:id/edit-post', isPostOwner, (req, res, next) => {
+  Post.findByIdAndUpdate(req.params.id, {
+    ...req.body,
+    new: true,
+  });
+});
+
+router.get('/:id/add-to-favorites', isLoggedIn, (req, res) => {
   User.findByIdAndUpdate(req.session.user._id, {
     $push: { favorites: req.params.id },
     new: true,

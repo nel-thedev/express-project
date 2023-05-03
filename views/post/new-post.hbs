@@ -12,7 +12,13 @@
     placeholder='Content'
   ></textarea>
 
-  <label for='tags'>Tags:</label>
+  <div class='center'>
+    <textarea name='code' id='editor'>
+      let greeting = () => console.log('Hello World!')
+    </textarea>
+  </div>
+
+  {{! <label for='tags'>Tags:</label>
   <select name='tags' id='tags' multiple>
     <option value='javascript'>JavaScript</option>
     <option value='php'>PHP</option>
@@ -22,8 +28,10 @@
     <option value='c#'>C#</option>
     <option value='C++'>C++</option>
     <option value='erlang'>Erlang</option>
-  </select>
+  </select> }}
 
   <button type='submit'>Add post!</button>
 
 </form>
+
+<script src='/javascripts/code.js'></script>
