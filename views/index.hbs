@@ -3,13 +3,17 @@
 <h3>See latest posts:</h3>
 
 <div class='container'>
-  <div class='row'>
-
+  <div class='row justify-content-between'>
     {{#each allPosts}}
-      <div class='col post-container'>
-        <h4><a href='/post/{{this._id}}'>{{this.title}}</a></h4>
-        <p>{{this.content}}</p>
-        <p>Favorited: {{this.favorites.length}}</p>
+      <div class='col-sm-4 mt-4'>
+        <div class='card'>
+          <h4 class='card-header text-center'><a
+              href='/post/{{this._id}}'
+            >{{this.title}}</a></h4>
+          <p class='card-text px-3'>{{this.content}}</p>
+          <p class='card-footer mb-0 small'>Favorited:
+            {{this.favorites.length}}</p>
+        </div>
       </div>
     {{/each}}
   </div>

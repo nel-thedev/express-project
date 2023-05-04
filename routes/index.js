@@ -7,6 +7,7 @@ var Post = require('../models/Post.model');
 router.get('/', function (req, res, next) {
   Post.find()
     .then((allPosts) => {
+      allPosts = allPosts.reverse();
       res.render('index', { allPosts });
     })
     .catch((err) => console.log(err));

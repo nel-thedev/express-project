@@ -83,23 +83,38 @@ router.get('/:id/edit-post', isPostOwner, function (req, res, next) {
 });
 
 router.post('/:id/edit-post', isPostOwner, (req, res, next) => {
-  Post.findByIdAndUpdate(req.params.id, {
-    ...req.body,
-    new: true,
+  Post.findByIdAndUpdate(
+    req.params.id,
+    {
+      ...req.body,
+    },
+    { new: true }
+  ).then(() => {
+    res.redirect(`/post/${req.params.id}`);
   });
 });
 
 router.get('/:id/add-to-favorites', isLoggedIn, (req, res) => {
-  User.findByIdAndUpdate(req.session.user._id, {
-    $push: { favorites: req.params.id },
-    new: true,
-  });
-  Post.findByIdAndUpdate(req.params.id, {
-    $push: { favorites: req.session.user._id },
-    new: true,
-  })
-
-    .then(() => {
+  //   console.log('Params: ', req.params.id);
+  User.findByIdAndUpdate(
+    req.session.user._id,
+    {
+      $push: { favorites: req.params.id },
+    },
+    { new: true }
+  )
+    .then((updatedUser) => {
+      console.log('This is the updated user: ', updatedUser);
+      return Post.findByIdAndUpdate(
+        req.params.id,
+        {
+          $push: { favorites: req.session.user._id },
+        },
+        { new: true }
+      );
+    })
+    .then((updatedPost) => {
+      console.log('This is the updated post: ', updatedPost);
       res.redirect(`/post/${req.params.id}`);
     })
     .catch((err) => console.log(err));
