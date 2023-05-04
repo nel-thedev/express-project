@@ -19,7 +19,7 @@ Snippetz is built using popular web development technologies, including:
 - CodeMirror: syntax highlighting library for the web
 - Bootstrap: front-end framework for responsive web design
 
-The application's user interface is simple and easy to use, making it accessible for developers of all skill levels. Users can quickly search for snippets, filter them by programming language, and view detailed information about each one.
+The application's user interface is simple and easy to use, making it accessible for developers of all skill levels.
 
 ## Usage
 
