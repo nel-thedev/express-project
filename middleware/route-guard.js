@@ -52,22 +52,6 @@ const isPostOwner = (req, res, next) => {
         }
       })
       .catch((err) => console.log(err));
-
-    // Post.findById(req.params.id)
-    //   .populate('user')
-    //   .then((post) => {
-    //     // console.log(
-    //     //   'HERE IDs: ',
-    //     //   req.session.user._id,
-    //     //   post.user._id.toHexString()
-    //     // );
-    //     if (req.session.user._id !== post.user._id.toHexString()) {
-    //       alert("You cannot edit other users' posts");
-    //       res.redirect(`/post/${req.params.id}`);
-    //     } else {
-    //       next();
-    //     }
-    //   });
   }
 };
 // const isPostOwner = (req, res, next) => {
