@@ -1,21 +1,22 @@
 <h3>Edit Post</h3>
 
 <form action='/post/{{post._id}}/edit-post' method='post'>
-  <label for='title'>Title</label>
   <input
     type='text'
     name='title'
     id='title'
     placeholder='Title'
     value='{{post.title}}'
+    class='form-control form-control-lg text-center border-0 p-0 fs-2'
   />
 
-  <label for='content'>Content</label>
   <textarea
     type='text'
     name='content'
     id='content'
     placeholder='Content'
+    class='form-control form-control-lg border-0 p-0 fs-5 mt-3'
+    rows='6'
   >{{post.content}}</textarea>
 
   <div class='center'>
@@ -24,19 +25,9 @@
     </textarea>
   </div>
 
-  {{! <label for='tags'>Tags:</label>
-  <select name='tags' id='tags' multiple>
-    <option value='javascript'>JavaScript</option>
-    <option value='php'>PHP</option>
-    <option value='java'>Java</option>
-    <option value='golang'>Golang</option>
-    <option value='python'>Python</option>
-    <option value='c#'>C#</option>
-    <option value='C++'>C++</option>
-    <option value='erlang'>Erlang</option>
-  </select> }}
-
-  <button type='submit'>Update!</button>
+  <div class='text-center'>
+    <button type='submit' class='btn btn-primary mt-4'>Update</button>
+  </div>
 
 </form>
 
