@@ -5,10 +5,10 @@ const postSchema = new Schema({
   title: {
     type: String,
     required: [true, 'Title required.'],
+    maxlength: 50,
   },
   content: { type: String, maxlength: 2000, required: true },
   code: { type: String, maxlength: 3000, required: true },
-  tags: [{ type: String }],
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   favorites: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });

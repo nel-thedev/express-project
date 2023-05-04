@@ -120,4 +120,12 @@ router.get('/:id/add-to-favorites', isLoggedIn, (req, res) => {
     .catch((err) => console.log(err));
 });
 
+router.get('/:id/delete-post', isPostOwner, (req, res, next) => {
+  Post.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch((err) => console.log(err));
+});
+
 module.exports = router;

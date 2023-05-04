@@ -1,3 +1,4 @@
 {
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "html.format.wrapLineLength": 0
 }

@@ -1,8 +1,8 @@
 {{#if errorMessage}}
-  <h3>{{errorMessage}}</h3>
+  <h3 class='text-center text-white bg-danger'>{{errorMessage}}</h3>
 {{/if}}
 
-<h2>{{post.title}}</h2>
+<h2 class='text-center display-4 my-5'>{{post.title}}</h2>
 {{!-- <p>Tagged:
   {{#each post.tags}}
     {{#if @last}}
@@ -13,33 +13,50 @@
     {{/if}}
   {{/each}}
 </p> --}}
-<p>{{post.content}}</p>
+<p class='fs-4'>{{post.content}}</p>
 <div class='center'>
   <textarea name='code' id='codeView'>
     {{post.code}}
   </textarea>
 </div>
-<a href='/post/{{post._id}}/add-to-favorites'>Add to favorites!</a>
-<p>Favorited {{post.favorites.length}} times.</p>
+<p class='my-3 py-auto'>Favorited
+  {{post.favorites.length}}
+  times
+  <a
+    href='/post/{{post._id}}/add-to-favorites'
+    class='btn btn-sm btn-outline-warning'
+  >Add to favorites!</a>
+</p>
 <p>Created by:
   <a
     href='/user/public-profile/{{post.user._id}}'
   >{{post.user.username}}</a></p>
-<a href='/post/{{post._id}}/edit-post'>Edit post.</a>
+<div class='text-center'>
+  <a
+    href='/post/{{post._id}}/edit-post'
+    class='btn btn-sm btn-outline-primary mx-1'
+  >Edit post</a>
+  <a
+    href='/post/{{post._id}}/delete-post'
+    class='btn btn-sm btn-outline-primary mx-1'
+  >Delete post</a>
+
+</div>
 <hr />
 <br />
 <h4>Comments:</h4>
 
 <div class='add-comment'>
   <form action='/comments/add-comment/{{post._id}}' method='post'>
-    <label for='comment'>Add comment:</label>
-    <input type='text' name='comment' id='comment' />
-    <button type='submit'>Add comment</button>
+    <label for='comment' class='form-label'>Add comment:</label>
+    <input type='text' name='comment' id='comment' class='form-control' />
+    <button type='submit' class='btn btn-sm btn-primary'>Add comment</button>
   </form>
 </div>
 
 {{#if post.comments}}
   {{#each post.comments}}
+    <hr />
     <h5><a
         href='/user/public-profile/{{this.user._id}}'
       >{{this.user.username}}</a>:</h5>

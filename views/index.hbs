@@ -1,16 +1,17 @@
-<h1>Welcome to {{title}}</h1>
+<h1 class='m-4'>Welcome to Snippetz</h1>
 <hr />
-<h3>See latest posts:</h3>
+<h3 class='mx-4'>See latest posts:</h3>
 
 <div class='container'>
   <div class='row justify-content-between'>
     {{#each allPosts}}
-      <div class='col-sm-4 mt-4'>
+      <div class='col-sm-4 my-4'>
         <div class='card'>
-          <h4 class='card-header text-center'><a
+          <h4 class='card-header text-center text-bg-primary'><a
               href='/post/{{this._id}}'
+              class='text-light text-decoration-none'
             >{{this.title}}</a></h4>
-          <p class='card-text px-3'>{{this.content}}</p>
+          <p class='card-text p-3'>{{this.content}}</p>
           <p class='card-footer mb-0 small'>Favorited:
             {{this.favorites.length}}</p>
         </div>

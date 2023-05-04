@@ -1,26 +1,39 @@
 <h2>Sign up</h2>
 
-<div id='form'>
-  <form action='/auth/signup' method='post'>
-    <label for='username'>Username:</label>
-    <input type='text' name='username' placeholder='Username' id='username' />
+<div id='form' class='my-5'>
+  <form action='/auth/signup' method='post' class='text-center'>
+    <label for='username' class='form-label mt-5'>Username:</label>
+    <input
+      type='text'
+      name='username'
+      placeholder='Username'
+      id='username'
+      class='form-control'
+    />
 
-    <label for='email'>Email:</label>
-    <input type='email' name='email' placeholder='Email' id='email' />
+    <label for='email' class='form-label mt-5'>Email:</label>
+    <input
+      type='email'
+      name='email'
+      placeholder='Email'
+      id='email'
+      class='form-control'
+    />
 
-    <label for='password'>Password:</label>
+    <label for='password' class='form-label mt-5'>Password:</label>
     <input
       type='password'
       name='password'
       placeholder='Password'
       id='password'
+      class='form-control'
     />
 
     {{#if errorMessage}}
       <p class='error'>{{errorMessage}}</p>
     {{/if}}
 
-    <button type='submit'>Sign up!</button>
+    <button type='submit' class='btn btn-primary text-center mt-5'>Sign up!</button>
 
   </form>
 </div>

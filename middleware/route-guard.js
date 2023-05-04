@@ -45,7 +45,7 @@ const isPostOwner = (req, res, next) => {
         if (req.session.user._id !== post.user._id.toHexString()) {
           res.render('post/post.hbs', {
             post: post,
-            errorMessage: "You cannot edit other users' posts",
+            errorMessage: "You cannot modify other users' posts",
           });
         } else {
           next();
