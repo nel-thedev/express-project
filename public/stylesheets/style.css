@@ -8,10 +8,6 @@ body {
   justify-content: space-between;
 }
 
-a {
-  /* color: #00b7ff; */
-}
-
 .codemirror {
   border-radius: 10px;
 }
