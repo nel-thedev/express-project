@@ -16,27 +16,6 @@ router.get('/new-post', isLoggedIn, (req, res, next) => {
   res.render('post/new-post.hbs');
 });
 
-// router.post('/new-post', (req, res, next) => {
-//   const { title, content, tags } = req.body;
-
-//   Post.create({
-//     user: req.session.user._id,
-//     title,
-//     content,
-//     tags,
-//   })
-//     .then((newPost) => {
-//       return User.findByIdAndUpdate(newPost.user, {
-//         $push: { posts: newPost._id },
-//         new: true,
-//       }).then(() => {
-//         console.log('Created: ', newPost);
-//         res.redirect(`/post/${newPost._id}`);
-//       });
-//     })
-//     .catch((err) => console.log(err));
-// });
-
 //router.post('/new-post') async/await version
 router.post('/new-post', isLoggedIn, async (req, res) => {
   try {
@@ -44,12 +23,10 @@ router.post('/new-post', isLoggedIn, async (req, res) => {
       ...req.body,
       user: req.session.user._id,
     });
-    console.log('here after create post');
     await User.findByIdAndUpdate(createdPost.user, {
       $push: { posts: createdPost._id },
       new: true,
     });
-    console.log('here after update user');
     res.redirect(`/post/${createdPost._id}`);
   } catch (error) {
     console.log(error);
@@ -95,7 +72,6 @@ router.post('/:id/edit-post', isPostOwner, (req, res, next) => {
 });
 
 router.get('/:id/add-to-favorites', isLoggedIn, (req, res) => {
-  //   console.log('Params: ', req.params.id);
   User.findByIdAndUpdate(
     req.session.user._id,
     {
@@ -104,7 +80,6 @@ router.get('/:id/add-to-favorites', isLoggedIn, (req, res) => {
     { new: true }
   )
     .then((updatedUser) => {
-      console.log('This is the updated user: ', updatedUser);
       return Post.findByIdAndUpdate(
         req.params.id,
         {
@@ -114,7 +89,6 @@ router.get('/:id/add-to-favorites', isLoggedIn, (req, res) => {
       );
     })
     .then((updatedPost) => {
-      console.log('This is the updated post: ', updatedPost);
       res.redirect(`/post/${req.params.id}`);
     })
     .catch((err) => console.log(err));

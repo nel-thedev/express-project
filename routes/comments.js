@@ -12,14 +12,12 @@ router.post('/add-comment/:id', isLoggedIn, function (req, res, next) {
     content: req.body.comment,
   })
     .then((newComment) => {
-      console.log('New comment: ', newComment);
       return Post.findByIdAndUpdate(req.params.id, {
         $push: { comments: newComment._id },
         new: true,
       });
     })
     .then((updatedPost) => {
-      console.log('Updated post: ', updatedPost);
       res.redirect(`/post/${updatedPost._id}`);
     })
     .catch((err) => console.log(err));

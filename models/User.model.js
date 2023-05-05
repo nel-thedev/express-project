@@ -19,7 +19,6 @@ const userSchema = new Schema(
       required: [true, 'Password is required.'],
     },
 
-    // interests: [{type: String}],
     posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
     favorites: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   },

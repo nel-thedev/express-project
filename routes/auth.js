@@ -63,8 +63,6 @@ router.post('/login', isLoggedOut, (req, res, next) => {
         return;
       } else if (bcryptjs.compareSync(password, user.password)) {
         req.session.user = user;
-        console.log('Session', req.session);
-        console.log('User logged in: ', user.username);
         res.redirect('/user/profile');
       } else {
         res.render('auth/login', {

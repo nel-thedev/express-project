@@ -5,7 +5,6 @@ const User = require('../models/User.model');
 // checks if the user is logged in when trying to access a specific page
 const isLoggedIn = (req, res, next) => {
   if (!req.session.user) {
-    console.log('User not logged in');
     return res.redirect('/auth/login');
   }
   next();
@@ -15,7 +14,6 @@ const isLoggedIn = (req, res, next) => {
 // redirects the user to the home page
 const isLoggedOut = (req, res, next) => {
   if (req.session.user) {
-    console.log('User is already logged in');
     return res.redirect('/');
   }
   next();
@@ -23,7 +21,6 @@ const isLoggedOut = (req, res, next) => {
 
 const isProfileOwner = (req, res, next) => {
   if (req.session.user) {
-    console.log(req.session.user._id, req.params.id);
     if (req.session.user._id === req.params.id) {
       return res.redirect('/user/profile');
     }
@@ -54,17 +51,6 @@ const isPostOwner = (req, res, next) => {
       .catch((err) => console.log(err));
   }
 };
-// const isPostOwner = (req, res, next) => {
-//   if (req.session) {
-//     Post.findById(req.params.id).then((post) => {
-//       if (!req.session.user === post.user) {
-//         alert("You cannot edit other users' posts");
-//         return;
-//       }
-//     });
-//   } else res.redirect('/auth/login');
-//   next();
-// };
 
 module.exports = {
   isLoggedIn,
